@@ -2,6 +2,13 @@ module.exports = [
   "strapi::logger",
   "strapi::errors",
   {
+    name: "strapi::cors",
+    config: {
+      enabled: true,
+      origin: ["http://localhost:5173"], // Ajoutez l'URL de votre frontend ici
+    },
+  },
+  {
     name: "strapi::security",
     config: {
       contentSecurityPolicy: {
