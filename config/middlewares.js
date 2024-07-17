@@ -5,10 +5,7 @@ module.exports = [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: [
-        "http://localhost:5173",
-        "https://site--backend-le-bon-coin--grfpcmvjpg8z.code.run/",
-      ],
+      origin: ["http://localhost:5173"],
     },
   },
   {
