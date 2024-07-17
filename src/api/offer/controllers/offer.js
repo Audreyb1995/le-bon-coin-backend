@@ -50,12 +50,13 @@ module.exports = createCoreController("api::offer.offer", ({ strapi }) => ({
 
   async payment(ctx) {
     try {
-      const { status } = await stripe.charges.create({
-        amount: ctx.request.body.amount * 100,
+      let { status } = await stripe.charges.create({
+        amount: request.body.amount * 100,
         currency: "eur",
-        description: `Paiement le bon coin pour : ${ctx.request.body.title}`,
-        source: ctx.request.body.token,
+        description: `Paiement le bon coin pour : ${request.body.title}`,
+        source: request.body.token,
       });
+      ctx.response.status = 201;
       return { status: status };
     } catch (error) {
       ctx.response.status = 500;
