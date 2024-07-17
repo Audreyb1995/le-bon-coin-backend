@@ -1,5 +1,7 @@
 "use strict";
 
+const stripe = require("stripe")(process.env.STRIPE_API_SECRET);
+
 /**
  * offer controller
  */
@@ -40,6 +42,21 @@ module.exports = createCoreController("api::offer.offer", ({ strapi }) => ({
         const { data, meta } = await super.create(ctx);
         return { data, meta };
       }
+    } catch (error) {
+      ctx.response.status = 500;
+      return { message: error.message };
+    }
+  },
+
+  async payment(ctx) {
+    try {
+      const { status } = await stripe.charges.create({
+        amount: ctx.request.body.amount * 100,
+        currency: "eur",
+        description: `Paiement le bon coin pour : ${ctx.request.body.title}`,
+        source: ctx.request.body.token,
+      });
+      return { status: status };
     } catch (error) {
       ctx.response.status = 500;
       return { message: error.message };
