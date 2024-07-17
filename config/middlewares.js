@@ -7,7 +7,7 @@ module.exports = [
       enabled: true,
       origin: [
         "http://localhost:5173",
-        "https://site--backend-le-bon-coin--grfpcmvjpg8z.code.run",
+        "https://site--backend-le-bon-coin--grfpcmvjpg8z.code.run/",
       ],
     },
   },
